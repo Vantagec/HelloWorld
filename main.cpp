@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstdlib>
-//cccccccccc
+//cc
 int main(int argc, char* argv[]) {
     if (argc > 1) {
         int build_number = std::atoi(argv[1]);
