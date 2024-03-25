@@ -144,7 +144,7 @@ Bounds<Iter> getBoundsByIpMask(Iter itStart, Iter itEnd, const std::string& sIpM
     return res;
 }
 
-// Return lambda which unpack and output ip
+
 template<typename T>
 auto PoolCollection<T>::getFnIpOutput(std::ostream& out)
 {
@@ -154,9 +154,7 @@ auto PoolCollection<T>::getFnIpOutput(std::ostream& out)
     };
 }
 
-/** Example:
-filtering_and_output_by_mask(out, pool, "46.70.*.*"s);
-*/
+
 template<typename T>
 void PoolCollection<T>::filtering_and_output_by_mask(
     std::ostream& out, ip_pool<T>& pool, const string& ip_mask)
@@ -167,7 +165,7 @@ void PoolCollection<T>::filtering_and_output_by_mask(
     std::for_each(bounds.lower, bounds.upper, fnIpOutput);
 }
 
-// TODO! (Analize it) Don't call unpack_ip (make special structure)
+)
 template<typename T>
 void PoolCollection<T>::filtering_and_output_pools(std::ostream& out)
 {
@@ -190,18 +188,18 @@ void PoolCollection<T>::filtering_and_output_pools(std::ostream& out)
     };
     //// end Helpers
 
-    // Output sorted base_pool
+
     output_pools(out, std::vector<ip_pool_ptr>{ &pool });
 
-    // Output ip which started 1
+
     auto itFirst1 = std::find_if_not(std::reverse_iterator<ip_pool_iterator>(pool.rbegin()), pool.rend(), ip_checker<1>).base();
-    /*fnOutputIpRange(itFirst1, pool.end());*/
+
     std::for_each(itFirst1, pool.end(), fnIpOutput);
 
-    // Output ip which started 47.70.
+
     filtering_and_output_by_mask(out, pool, "46.70.*.*"s);
 
-    // Output ip which includes 46
+   
     fnOutputWhile(pool.begin(), pool.end(), defAnyChecker(46));
 }
 
