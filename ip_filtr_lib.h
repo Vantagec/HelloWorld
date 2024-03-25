@@ -29,7 +29,7 @@ private:
     virtual RevIter rend() = 0;
 
     virtual void push_back(const T& val) = 0;
-    /*virtual void reserve(size_t size) = 0;*/
+
     virtual T& operator[](const size_t& idx) = 0;
     virtual size_t size() = 0;
     virtual void sort(std::function<bool(const T & left, const T & right)> predicat) = 0;
@@ -105,9 +105,7 @@ public:
     void push_back(const T& val) {
         pool.push_back(val);
     }
-    //void reserve(size_t size) {
-    //	pool.reserve(size);
-    //}
+
     T& operator[](const size_t& idx) {
         auto cur_idx = 0;
         for (auto& cur : pool) {
@@ -134,18 +132,12 @@ public:
     using ip_pool = ip_pool_arlist<T>;
 #endif
 
-//////////////////////////////////////
-//// Utils
+
 void read_lines(std::istream& stream, func_str fn_line_handler);
 
-// ("",  '.') -> [""]
-// ("11", '.') -> ["11"]
-// ("..", '.') -> ["", "", ""]
-// ("11.", '.') -> ["11", ""]
-// (".11", '.') -> ["", "11"]
-// ("11.22", '.') -> ["11", "22"]
+
 std::vector<std::string> split(const std::string& str, char d);
-//////////////////////////////////////
+
 
 template<class T>
 struct PoolCollection {
@@ -166,5 +158,4 @@ struct PoolCollection {
 
 void run(std::istream& in = std::cin, std::ostream& out = std::cout);
 
-
-#endif // IP_FILTR_LIB_H
+#endif 
